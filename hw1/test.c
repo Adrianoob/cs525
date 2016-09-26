@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "storage_mgr.h"
+#include "dberror.h"
 
 int main() {
 	initStorageManager();

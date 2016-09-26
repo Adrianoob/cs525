@@ -1,3 +1,5 @@
+all:test.o
+
 test.o: test.c
 	 gcc -c test.c storage_mgr.o
 

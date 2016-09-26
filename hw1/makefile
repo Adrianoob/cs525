@@ -5,4 +5,4 @@ test.o: test.c
 	 gcc -c test.c storage_mgr.o
 
 storage_mgr.o: storage_mgr.h
-	 gcc -c storage_mgr.h storage_mgr.c
+	 gcc -c storage_mgr.h

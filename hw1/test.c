@@ -3,7 +3,7 @@
 
 int main() {
 	initStorageManager();
-	RC code = createFilePage("file1");
+	RC code = createPageFile("file1");
 	printf("%s\n", "hello world");
 	printf("%d\n", code);
 	return 0;

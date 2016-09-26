@@ -17,7 +17,7 @@ typedef char* SM_PageHandle;
 /* manipulating page files */
 extern void initStorageManager (void);
 extern RC createPageFile (char *fileName);
-// extern RC openPageFile (char *fileName, SM_FileHandle *fHandle);
+extern RC openPageFile (char *fileName, SM_FileHandle *fHandle);
 // extern RC closePageFile (SM_FileHandle *fHandle);
 // extern RC destroyPageFile (char *fileName);
 

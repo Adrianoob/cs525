@@ -2,7 +2,7 @@
 #include "storage_mgr.h"
 
 int main() {
-	initStorageManager(void);
+	initStorageManager();
 	printf("%s\n", "hello world");
 	return 0;
 }

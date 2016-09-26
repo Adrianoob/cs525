@@ -1,7 +1,7 @@
 test:test.o
 	gcc -o test test.o
 
-test.o:test.c storage_mgr.h storage_mgr.o
+test.o:test.c storage_mgr.o storage_mgr.h
 	 gcc -c storage_mgr.o test.c
 
 storage_mgr.o:storage_mgr.c

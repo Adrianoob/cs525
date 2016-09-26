@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "storage_mgr.h"
+#include "storage_mgr.c"
 
 int main() {
 	initStorageManager();

@@ -1,5 +1,5 @@
 test:test.o storage_mgr.o
-	gcc -o test test.o storage_mgr.o
+	gcc -o test test.o storage_mgr.o dberror.h
 
 test.o:test.c 
 	 gcc -c test.c

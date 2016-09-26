@@ -8,22 +8,15 @@ extern void initStorageManager (void) {
 }
 
 extern RC createPageFile (char *fileName) {
-	FILE *pagef = fopen(fileName, "w");
-	char *totalpg_str, *first_page;
+	FILE *newPF = fopen(fileName, "w");
+	char *pf_str;
 
-	totalpg_str = (char *) calloc(PAGE_SIZE, sizeof(char));  /* allocate "first" page to store total number of pages information */
-	first_page = (char *) calloc(PAGE_SIZE, sizeof(char));   /* considered as actual first page for the data */
+	pf_str = (char *) malloc(PAGE_SIZE, sizeof(char));  /* allocate "first" page to store total number of pages information */
+	strcpy(pf_str, "/0");
 
-	strcat(totalpg_str,"1\n");
-
-
-	fwrite(totalpg_str, sizeof(char), PAGE_SIZE, pagef);
-	fwrite(first_page, sizeof(char), PAGE_SIZE, pagef);
-
-	free(totalpg_str);
-	free(first_page);
-
-	fclose(pagef);
+	fwrite(pf_str, sizeof(char), PAGE_SIZE, newPF);
+	free(pf_str);
+	fclose(newPF);
 
 	return RC_OK;
 }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "storage_mgr.h"
+#include "dbherror.h"
 
 extern void initStorageManager (void) {
 	// initialize SM

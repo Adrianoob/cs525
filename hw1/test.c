@@ -3,8 +3,10 @@
 
 int main() {
 	initStorageManager();
-	RC code = createPageFile("file1");
+	RC code1 = createPageFile("file1");
+	RC code2 = openPageFile();
 	printf("%s\n", "hello world");
-	printf("%d\n", code);
+	printf("createPageFile: %d\n", code1);
+	printf("openPageFIle: %d\n", code2);
 	return 0;
 }

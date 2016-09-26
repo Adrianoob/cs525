@@ -9,14 +9,34 @@ extern void initStorageManager (void) {
 
 extern RC createPageFile (char *fileName) {
 	FILE *newPF = fopen(fileName, "w");
-	char *pf_str;
 
-	pf_str = (char *) malloc(PAGE_SIZE * sizeof(char));  /* allocate "first" page to store total number of pages information */
-	strcpy(pf_str, "/0");
+	char *pf_str;
+	pf_str = (char *) malloc(PAGE_SIZE * sizeof(char));
+	strcpy(pf_str, "1\0");
 
 	fwrite(pf_str, sizeof(char), PAGE_SIZE, newPF);
 	free(pf_str);
 	fclose(newPF);
 
 	return RC_OK;
+}
+
+RC openPageFile (char *fileName, SM_FileHandle *fHandle){
+    FILE *pf = fopen(fileName, "r+");
+
+    if (pf){
+        char *str;
+
+        str = (char *) malloc(sizeof(char) * PAGE_SIZE);
+        fgets(str, PAGE_SIZE, pf);
+
+        fHandle->fileName = fileName;
+        fHandle->totalNumPages = atoi(str);
+        fHandle->curPagePos = 0;
+        fHandle->mgmtInfo = pf;
+
+        free(str);
+        return RC_OK;
+    }
+    return RC_FILE_NOT_FOUND;
 }

@@ -9,10 +9,10 @@ extern void initStorageManager (void) {
 
 extern RC createPageFile (char *fileName) {
 	FILE *pagef = fopen(fileName, "w");
-    char *totalpg_str, *first_page;
+	char *totalpg_str, *first_page;
 
-    totalpg_str = (char *) calloc(PAGE_SIZE, sizeof(char));  /* allocate "first" page to store total number of pages information */
-    first_page = (char *) calloc(PAGE_SIZE, sizeof(char));   /* considered as actual first page for the data */
+	totalpg_str = (char *) calloc(PAGE_SIZE, sizeof(char));  /* allocate "first" page to store total number of pages information */
+	first_page = (char *) calloc(PAGE_SIZE, sizeof(char));   /* considered as actual first page for the data */
 
     strcat(totalpg_str,"1\n");
 

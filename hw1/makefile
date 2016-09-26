@@ -1,5 +1,3 @@
-all:test.o
-
 test:test.o
 	gcc -o test test.o
 

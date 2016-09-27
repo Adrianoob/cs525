@@ -15,7 +15,7 @@ int main() {
 	printf("closePageFile: %d\n", code3);
 	
 	RC code4 = destroyPageFile("file1");
-	prinft("destroyPageFile: %d\n", code4);
+	printf("destroyPageFile: %d\n", code4);
 	
 	return 0;
 }

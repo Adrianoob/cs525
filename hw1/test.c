@@ -9,7 +9,13 @@ int main() {
 	
 	SM_FileHandle f_handle;
 	RC code2 = openPageFile("file1", &f_handle);	
-	printf("openPageFIle:\n\tcode: %d\n\ttotal page:%d\n\tfile name:%s\n", code2, f_handle.totalNumPages, f_handle.fileName);
+	printf("openPageFile:\n\tcode: %d\n\ttotal page:%d\n\tfile name:%s\n", code2, f_handle.totalNumPages, f_handle.fileName);
+	
+	RC code3 = closePageFile("file1");
+	printf("closePageFile: %d\n", code3);
+	
+	RC code4 = destroyPageFile("file1");
+	prinft("destroyPageFile: %d\n", code4);
 	
 	return 0;
 }

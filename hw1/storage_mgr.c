@@ -12,7 +12,7 @@ extern RC createPageFile (char *fileName) {
 
 	char *pf_str;
 	pf_str = (char *) malloc(PAGE_SIZE * sizeof(char));
-	strcpy(pf_str, "1\0");
+	strcpy(pf_str, "\0");
 
 	fwrite(pf_str, sizeof(char), PAGE_SIZE, newPF);
 	free(pf_str);
@@ -21,7 +21,7 @@ extern RC createPageFile (char *fileName) {
 	return RC_OK;
 }
 
-extern RC openPageFile (char *fileName, SM_FileHandle *fHandle){
+extern RC openPageFile (char *fileName, SM_FileHandle *fHandle) {
 	FILE *pf = fopen(fileName, "r+");
 	
 	if (pf){
@@ -31,7 +31,7 @@ extern RC openPageFile (char *fileName, SM_FileHandle *fHandle){
 		fgets(str, PAGE_SIZE, pf);
 
 		fHandle->fileName = fileName;
-		fHandle->totalNumPages = atoi(str);
+		fHandle->totalNumPages = strlen(str)/PAGE_SIZE + 1;
 		fHandle->curPagePos = 0;
 		fHandle->mgmtInfo = pf;
 		
@@ -55,4 +55,30 @@ extern RC destroyPageFile (char *fileName){
 		return RC_OK;
 	}
 	return RC_FILE_NOT_FOUND;
+}
+
+extern RC readBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
+	
+	int seekSuccess;
+	size_t readBlockSize;
+
+	/* make sure pageNum is valid */
+	if (pageNum >= fHandle->totalNumPages || pageNum < 0)
+		return RC_READ_NON_EXISTING_PAGE;
+
+	/* make sure fHandle has a file open */
+	if (fHandle->mgmtInfo == NULL)
+		return RC_FILE_NOT_FOUND;
+
+	seekSuccess = fseek(fHandle->mgmtInfo, (pageNum+1)*PAGE_SIZE*sizeof(char), SEEK_SET);
+
+	/* checks if the file seek was successful. If yes, reads the file page into mempage. */
+	if (seekSuccess == 0){
+		readBlockSize = fread(memPage, sizeof(char), PAGE_SIZE, fHandle->mgmtInfo);
+		fHandle->curPagePos = pageNum;
+		return RC_OK;
+	}
+	else{
+		return RC_READ_NON_EXISTING_PAGE;
+	}
 }

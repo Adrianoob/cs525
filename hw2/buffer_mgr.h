@@ -14,7 +14,7 @@ typedef enum ReplacementStrategy {
   RS_CLOCK = 2,
   RS_LFU = 3,
   RS_LRU_K = 4
-} ReplacementStrategy;
+} ReplacementStrategy
 
 // Data Types and Structures
 typedef int PageNumber;
@@ -26,11 +26,15 @@ typedef struct BM_BufferPool {
   ReplacementStrategy strategy;
   void *mgmtData; // use this one to store the bookkeeping info your buffer 
                   // manager needs for a buffer pool
+  int numReadIO;
+  int numWriteIO;
 } BM_BufferPool;
 
 typedef struct BM_PageHandle {
   PageNumber pageNum;
   char *data;
+  int dirty;    // if this page is altered, 1 -> dirty, 0 -> not
+  int fixcount; // number of clients using this page  
 } BM_PageHandle;
 
 // convenience macros
